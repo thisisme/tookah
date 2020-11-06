@@ -1,3 +1,5 @@
+import Vue from 'vue'
+
 const state = {
   questions: []
 }
@@ -25,9 +27,32 @@ const getters = {
   }
 }
 
+const actions = {
+  fetchQuestions: async (context, params) => {
+    const path = 'api/questions'
+
+    let response = {}
+    try {
+      response = await Vue.axios.get(path)
+    } catch (error) {
+      throw new Error(error)
+    }
+
+    if (response && response.status === 200) {
+      const data = response.data
+      context.commit('addQuestions', data.questions)
+
+      return true
+    }
+
+    return false
+  }
+}
+
 export default {
   namespaced: true,
   state,
   mutations,
-  getters
+  getters,
+  actions
 }

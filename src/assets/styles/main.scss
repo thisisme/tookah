@@ -77,6 +77,11 @@ h1 {
   }
 }
 
+.game__lifelines {
+  display: flex;
+  justify-content: space-around;
+}
+
 .question {
   background-color: $question-bg;
   border-radius: 0.25rem;
