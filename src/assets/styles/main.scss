@@ -68,6 +68,15 @@ h1 {
   }
 }
 
+.game__prepare {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  h2 {
+    text-align: center;
+  }
+}
+
 .question {
   background-color: $question-bg;
   border-radius: 0.25rem;
