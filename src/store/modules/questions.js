@@ -1,32 +1,5 @@
 const state = {
-  questions: [
-    {
-      text: 'How much is the fish?',
-      alternatives: [
-        {
-          text: '1',
-          value: 1,
-          answer: false
-        },
-        {
-          text: '2',
-          value: 2,
-          answer: false
-        },
-        {
-          text: '3',
-          value: 3,
-          answer: false
-        },
-        {
-          text: '4',
-          value: 4,
-          answer: true
-        }
-      ],
-      used: false
-    }
-  ]
+  questions: []
 }
 
 const mutations = {
