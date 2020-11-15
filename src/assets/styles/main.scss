@@ -20,6 +20,10 @@ $game-stats: #6261bb;
 $question-bg: #f0f8ff;
 $white: #ffffff;
 $border: #efefef;
+$alternative-bg: #7fffd4;
+$alternative-bg-hover: #5f9ea0;
+$button-bg: #88c008;
+$button-bg-hover: #0f58d6;
 
 body {
   font-size: 100%;
@@ -33,6 +37,33 @@ h1, h2, h3, h4, h5 {
 }
 h1 {
   font-style: italic;
+}
+
+p {
+  margin: 0 0 1rem 0;
+}
+
+button {
+  align-content: space-around;
+  background-color: $button-bg;
+  border: none;
+  border-radius: 0.125rem;
+  color: $white;
+  display: flex;
+  margin: 1rem;
+  padding: 1rem;
+  transition: all 140ms;
+  justify-content: center;
+  &:hover {
+    background-color: $button-bg-hover;
+    cursor: pointer;
+  }
+  &[disabled] {
+    cursor: default;
+  }
+  &[disabled]:hover {
+    background-color: $button-bg;
+  }
 }
 
 #app {
@@ -68,6 +99,15 @@ h1 {
   }
 }
 
+.game__answer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  h2 {
+    text-align: center;
+  }
+}
+
 .game__prepare {
   display: flex;
   flex-direction: column;
@@ -77,7 +117,18 @@ h1 {
   }
 }
 
+.game__progress {
+  display: flex;
+  margin: 0 auto;
+}
+
 .game__lifelines {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.lifelines {
   display: flex;
   justify-content: space-around;
 }
@@ -102,7 +153,7 @@ h1 {
 
 .question__alternatives--alternative {
   align-content: space-around;
-  background-color: aquamarine;
+  background-color: $alternative-bg;
   border: none;
   border-radius: 0.125rem;
   display: flex;
@@ -110,8 +161,21 @@ h1 {
   padding: 1rem;
   transition: all 140ms;
   width: 90%;
+  &:nth-child(1) {
+    background-color: red;
+  }
+  &:nth-child(2) {
+    background-color: green;
+  }
+  &:nth-child(3) {
+    background-color: blue;
+  }
+  &:nth-child(4) {
+    background-color: rgb(255, 217, 0);
+  }
   &:hover {
-    background-color: cadetblue;
+    // background-color: $alternative-bg-hover;
+    opacity: 70%;
     cursor: pointer;
   }
   @media (min-width: $breakpoint-tablet) {
