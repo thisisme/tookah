@@ -15,8 +15,7 @@
         class="game__answer"
         v-if="correctAnswer != undefined">
         <h2>
-          <span v-if="correctAnswer === true">Great! Correct answer</span>
-          <span v-else>Sorry! Wrong answer</span>!
+          <span>{{ correctAnswer }}</span>
         </h2>
       </div>
       <div
@@ -115,12 +114,12 @@ export default {
     /**
      * Set answer
      */
-    setAnswer (answer) {
+    setAnswer (answer, timeout = false) {
       clearInterval(this.timer)
       this.showQuestion = false
-      this.correctAnswer = false
+      this.correctAnswer = timeout ? 'Sorry! You ran out of time' : 'Sorry! Wrong answer'
       if (answer === true) {
-        this.correctAnswer = true
+        this.correctAnswer = 'Great! Correct answer'
         this.correctAnswers += 1
       }
       if (this.currentQuestion < this.questions.length) {
@@ -139,6 +138,7 @@ export default {
         this.questionTimer -= 1
         if (this.questionTimer === 0) {
           clearInterval(this.timer)
+          this.setAnswer(false, true)
         }
       }, 1000)
     },
