@@ -158,7 +158,9 @@ export default {
       console.log('remove to options')
     },
     lifelineTime () {
-      this.timer += 10
+      clearInterval(this.timer)
+      this.questionTimer += 10
+      this.setQuestionTimer()
     }
   },
   mounted () {
