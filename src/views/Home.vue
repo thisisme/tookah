@@ -31,6 +31,7 @@
       </div>
       <Question
         v-if="showQuestion"
+        ref="question"
         :question="getCurrentQuestion()"
         @answer="setAnswer" />
       <div
@@ -39,7 +40,7 @@
         <button
           @click="setPrepareTimer"
           :disabled="showQuestion === true">
-          <template v-if="currentQuestion === 1">
+          <template v-if="currentQuestion <= 1">
             Start
           </template>
           <template v-else>
@@ -53,10 +54,12 @@
         <p>50/50 removes two options and + 10 will give you 10 extra seconds</p>
         <div class="lifelines">
           <button
+            :disabled="lifelineHalfUsed"
             @click="lifelineHalf">
             50/50
           </button>
           <button
+          :disabled="lifelineTimeUsed"
            @click="lifelineTime">
             + 10 seconds
           </button>
@@ -80,12 +83,14 @@ export default {
       correctAnswers: 0,
       currentQuestion: 0,
       lastAnswered: false,
-      totalQuestions: 0,
-      showQuestion: false,
-      questionTimer: 15,
+      lifelineHalfUsed: false,
+      lifelineTimeUsed: false,
       prepareTimer: 5,
-      timer: undefined,
-      questionLoaded: false
+      questionTimer: 1500,
+      questionLoaded: false,
+      showQuestion: false,
+      totalQuestions: 0,
+      timer: undefined
     }
   },
   computed: {
@@ -124,7 +129,7 @@ export default {
       }
       if (this.currentQuestion < this.questions.length) {
         this.currentQuestion += 1
-        this.questionTimer = 15
+        this.questionTimer = 1500
         this.prepareTimer = 5
       } else {
         this.lastAnswered = true
@@ -155,12 +160,14 @@ export default {
       }, 1000)
     },
     lifelineHalf () {
-      console.log('remove to options')
+      this.$refs.question.removeOptions()
+      this.lifelineHalfUsed = true
     },
     lifelineTime () {
       clearInterval(this.timer)
       this.questionTimer += 10
       this.setQuestionTimer()
+      this.lifelineTimeUsed = true
     }
   },
   mounted () {
