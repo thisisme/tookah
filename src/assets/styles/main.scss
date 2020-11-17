@@ -100,11 +100,20 @@ button {
   }
 }
 
+.game__fedback {
+  background-color: $question-bg;
+  border-radius: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+}
+
 .game__answer {
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  h2 {
+  h2, h3 {
     text-align: center;
   }
 }
@@ -121,17 +130,6 @@ button {
 .game__progress {
   display: flex;
   margin: 0 auto;
-}
-
-.game__lifelines {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
-.lifelines {
-  display: flex;
-  justify-content: space-around;
 }
 
 .question {
@@ -182,6 +180,28 @@ button {
   @media (min-width: $breakpoint-tablet) {
     width: 40%;
   }
+  &[disabled] {
+    background-color: $question-bg-disabled;
+    cursor: not-allowed;
+  }
+  &[disabled]:hover {
+    background-color: $question-bg-disabled;
+    opacity: 100%;
+  }
+}
+
+.game__lifelines {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.lifelines {
+  display: flex;
+  justify-content: space-around;
+}
+
+.lifeline {
   &[disabled] {
     background-color: $question-bg-disabled;
     cursor: not-allowed;

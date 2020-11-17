@@ -41,7 +41,7 @@ export default {
       const alternatives = this.question.alternatives
         .filter((alternative, i) => alternative.answer === false)
         .map((filtered, i) => i)
-      const uniqueIndexes = helpers.getUniqueIndexes(2, alternatives)
+      const uniqueIndexes = helpers.getUniqueIndexes(Math.floor(alternatives / 2), alternatives)
       return uniqueIndexes
     }
   }
