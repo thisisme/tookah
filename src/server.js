@@ -56,10 +56,10 @@ export function makeServer ({ environment = 'development' } = {}) {
       })
       server.create('question', {
         id: uuidv4(),
-        text: 'Who the soundtrack to The Social Network?',
+        text: 'Who wrote the soundtrack to The Social Network?',
         alternatives: [
           { text: 'David Bowie', id: uuidv4(), answer: false },
-          { text: 'Prince', id: uuidv4(), answer: true },
+          { text: 'Prince', id: uuidv4(), answer: false },
           { text: 'Trent Reznor', id: uuidv4(), answer: true },
           { text: 'Nick Cave', id: uuidv4(), answer: false }
         ],

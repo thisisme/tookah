@@ -30,6 +30,12 @@ const mutations = {
 const getters = {
   settings: state => {
     return state.settings
+  },
+  numQuestions: state => {
+    return state.settings.find(setting => setting.name === 'numQuestions')
+  },
+  questionTimer: state => {
+    return state.settings.find(setting => setting.name === 'questionTimer')
   }
 }
 

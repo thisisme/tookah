@@ -94,21 +94,27 @@ export default {
       answerFeedback: undefined,
       correctAnswer: undefined,
       correctAnswers: 0,
-      currentQuestion: 0,
+      currentQuestion: 1,
       lastAnswered: false,
       lifelineHalfUsed: false,
       lifelineTimeUsed: false,
+      localQuestionTimer: undefined,
       prepareTimer: 5,
-      questionTimer: 15,
-      questionLoaded: false,
+      questionLoaded: true,
       showQuestion: false,
-      totalQuestions: 0,
       timer: undefined
     }
   },
   computed: {
     questions () {
       return this.$store.getters['questions/questions']
+    },
+    totalQuestions () {
+      const numQuestions = this.$store.getters['settings/numQuestions'].value
+      return numQuestions > 0 ? numQuestions : this.questions.length
+    },
+    questionTimer () {
+      return this.$store.getters['settings/questionTimer'].value
     }
   },
   methods: {
@@ -123,7 +129,7 @@ export default {
      * Show current question
      */
     question () {
-      if (this.currentQuestion <= this.questions.length) {
+      if (this.currentQuestion <= this.totalQuestions) {
         this.showQuestion = true
         this.setQuestionTimer()
         this.correctAnswer = undefined
@@ -141,9 +147,9 @@ export default {
         this.correctAnswer = 'Great! Correct answer'
         this.correctAnswers += 1
       }
-      if (this.currentQuestion < this.questions.length) {
+      if (this.currentQuestion < this.totalQuestions) {
         this.currentQuestion += 1
-        this.questionTimer = 15
+        this.localQuestionTimer = this.questionTimer
         this.prepareTimer = 5
       } else {
         this.lastAnswered = true
@@ -154,8 +160,8 @@ export default {
      */
     setQuestionTimer () {
       this.timer = setInterval(() => {
-        this.questionTimer -= 1
-        if (this.questionTimer === 0) {
+        this.localQuestionTimer -= 1
+        if (this.localQuestionTimer === 0) {
           clearInterval(this.timer)
           this.setAnswer(false, true)
         }
@@ -183,11 +189,6 @@ export default {
       this.setQuestionTimer()
       this.lifelineTimeUsed = true
     }
-  },
-  mounted () {
-    this.questionLoaded = true
-    this.currentQuestion = 1
-    this.totalQuestions = this.questions.length
   }
 }
 </script>
