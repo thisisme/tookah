@@ -44,10 +44,10 @@
         @answer="setAnswer" />
       <div
         class="game__progress"
-        v-if="!lastAnswered">
+        v-if="!showQuestion">
         <button
           @click="setPrepareTimer"
-          :disabled="showQuestion === true">
+          :disabled="prepareClicked">
           <template v-if="currentQuestion <= 1">
             Start
           </template>
@@ -99,6 +99,7 @@ export default {
       lifelineHalfUsed: false,
       lifelineTimeUsed: false,
       localQuestionTimer: undefined,
+      prepareClicked: false,
       prepareTimer: 5,
       questionLoaded: true,
       showQuestion: false,
@@ -144,6 +145,7 @@ export default {
     setAnswer (answer, feedback, timeout = false) {
       clearInterval(this.timer)
       this.showQuestion = false
+      this.prepareClicked = false
       this.correctAnswer = timeout ? 'Sorry! You ran out of time' : 'Sorry! Wrong answer'
       if (answer === true) {
         this.correctAnswer = 'Great! Correct answer'
@@ -171,6 +173,7 @@ export default {
      * Set prepare timer
      */
     setPrepareTimer () {
+      this.prepareClicked = true
       this.timer = setInterval(() => {
         this.prepareTimer -= 1
         if (this.prepareTimer === 0) {
