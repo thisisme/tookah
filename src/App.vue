@@ -17,6 +17,15 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+export default {
+  mounted () {
+    /**
+     * Fetch questions from api
+     */
+    this.$store.dispatch('questions/fetchQuestions')
+  }
+}
+</script>
 <style lang="scss">
 </style>

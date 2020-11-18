@@ -2,7 +2,7 @@
   <div class="home">
     <section class="game">
       <div class="game__stats">
-        <div class="game__stats--stat timer">{{ questionTimer }} seconds left</div>
+        <div class="game__stats--stat timer">{{ localQuestionTimer }} seconds left</div>
         <div class="game__stats--stat correct__answers">
           Correct answers: {{ correctAnswers }}
         </div>
@@ -61,7 +61,7 @@
         class="game__lifelines">
         <h3>Lifelines</h3>
         <p>You can use each lifeline one time only.</p>
-        <p>50/50 removes two options and + 10 will give you 10 extra seconds</p>
+        <p>50/50 removes half of the options and + 10 will give you 10 extra seconds</p>
         <div class="lifelines">
           <button
             :disabled="lifelineHalfUsed"
@@ -94,7 +94,7 @@ export default {
       answerFeedback: undefined,
       correctAnswer: undefined,
       correctAnswers: 0,
-      currentQuestion: 1,
+      currentQuestion: 0,
       lastAnswered: false,
       lifelineHalfUsed: false,
       lifelineTimeUsed: false,
@@ -130,7 +130,9 @@ export default {
      */
     question () {
       if (this.currentQuestion <= this.totalQuestions) {
+        this.currentQuestion += 1
         this.showQuestion = true
+        this.localQuestionTimer = this.questionTimer
         this.setQuestionTimer()
         this.correctAnswer = undefined
         this.answerFeedback = this.getCurrentQuestion().alternatives.find(alt => alt.answer === true).text
@@ -148,8 +150,6 @@ export default {
         this.correctAnswers += 1
       }
       if (this.currentQuestion < this.totalQuestions) {
-        this.currentQuestion += 1
-        this.localQuestionTimer = this.questionTimer
         this.prepareTimer = 5
       } else {
         this.lastAnswered = true
@@ -185,10 +185,13 @@ export default {
     },
     lifelineTime () {
       clearInterval(this.timer)
-      this.questionTimer += 10
+      this.localQuestionTimer += 10
       this.setQuestionTimer()
       this.lifelineTimeUsed = true
     }
+  },
+  mounted () {
+    this.localQuestionTimer = this.questionTimer
   }
 }
 </script>

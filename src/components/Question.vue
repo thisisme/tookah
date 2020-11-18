@@ -38,10 +38,16 @@ export default {
       this.optionsToRemove = this.getOptionsToRemove()
     },
     getOptionsToRemove () {
-      const alternatives = this.question.alternatives
-        .filter((alternative, i) => alternative.answer === false)
-        .map((filtered, i) => i)
-      const uniqueIndexes = helpers.getUniqueIndexes(Math.floor(alternatives / 2), alternatives)
+      const alternativesLength = this.question.alternatives.length
+      const alternatives = []
+      this.question.alternatives.filter((alternative, i) => {
+        if (alternative.answer === false) {
+          alternatives.push(i)
+        }
+      })
+      console.log(alternatives)
+      const uniqueIndexes = helpers.getUniqueIndexes(Math.floor(alternativesLength / 2), alternatives)
+      console.log(uniqueIndexes)
       return uniqueIndexes
     }
   }

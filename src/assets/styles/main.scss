@@ -108,6 +108,20 @@ button {
   width: 100%;
 }
 
+.home__information {
+  list-style-type: none;
+  margin-left: 0;
+  padding-left: 1rem;
+  > li:before {
+    display: inline-block;
+    content: '\2014';
+    margin-right: 0.5rem;
+  }
+  > li {
+    margin: 0.75rem;
+  }
+}
+
 .game {
   display: flex;
   flex-direction: column;
