@@ -1,6 +1,6 @@
-// const randomBoolen = () => {
-//   return Math.random() <= 0.5
-// }
+const randomBoolen = () => {
+  return Math.random() <= 0.5
+}
 
 const getUniqueIndexes = (count, indexes) => {
   const tmp = indexes
@@ -15,5 +15,6 @@ const getUniqueIndexes = (count, indexes) => {
 }
 
 export default {
+  randomBoolen,
   getUniqueIndexes
 }
