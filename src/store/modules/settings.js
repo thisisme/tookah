@@ -19,7 +19,11 @@ const mutations = {
   updateSettings (state, payload) {
     payload.forEach(el => {
       const tmp = state.settings.find(setting => setting.name === el.name)
-      tmp.value = el.value
+      if (tmp) {
+        tmp.value = el.value
+      } else {
+        state.settings.push(el)
+      }
     })
   },
   setQuestionTimer (state, payload) {
