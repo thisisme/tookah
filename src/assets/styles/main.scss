@@ -36,9 +36,6 @@ body {
 h1, h2, h3, h4, h5 {
   font-family: EczarRegular, serif;
 }
-h1 {
-  font-style: italic;
-}
 
 p {
   margin: 0 0 1rem 0;
@@ -69,8 +66,40 @@ button {
 
 #app {
   display: flex;
+  flex-direction: column;
   margin: 0 auto;
   width: 80%;
+}
+
+.header {
+  display: flex;
+  padding: 1rem 0;
+}
+
+.navigation {
+  align-items: center;
+  display: flex;
+  margin-left: auto;
+}
+
+.navigation__link {
+  color: $game-stats;
+  text-decoration: none;
+  &.navigation__link--home {
+    font-family: EczarRegular, serif;
+    font-style: italic;
+    font-size: 2rem;
+  }
+  &.navigation__link--settings {
+    padding: 0.75rem;
+  }
+  &:hover {
+    background-color: $alternative-bg;
+  }
+}
+
+.router-link-exact-active {
+  background-color: $alternative-bg;
 }
 
 .home {
@@ -209,4 +238,27 @@ button {
   &[disabled]:hover {
     background-color: $question-bg-disabled;
   }
+}
+
+.settings__list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  @media (min-width: $breakpoint-tablet) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.settings__actions {
+  display: flex;
+  button {
+    margin-left: auto;
+  }
+}
+
+.input {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
 }

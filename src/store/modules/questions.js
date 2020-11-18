@@ -24,6 +24,9 @@ const getters = {
   },
   questionById: state => id => {
     return state.questions.findOne(q => q.id === id)
+  },
+  questionsLength: state => {
+    return state.questions.length
   }
 }
 
