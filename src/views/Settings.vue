@@ -30,6 +30,31 @@
         Save
       </button>
     </section>
+    <section class="settings__questions">
+      <h3>Questions</h3>
+      <div
+        class="settings__questions--question"
+        v-for="question in questions"
+        :key="question.id">
+        <div class="settings__question__container">
+          <div class="settings__question__header">
+            <h4>Question</h4>
+            <span class="settings__question--id">#{{ question.id }}</span>
+          </div>
+          <p>{{ question.text }}</p>
+          <h5>Alternatives</h5>
+          <div class="settings__alternatives">
+            <div
+              class="settings__alternatives--alternative"
+              :class="{ correct: alternative.answer }"
+              v-for="alternative in question.alternatives"
+              :key="alternative.id">
+              <p>{{ alternative.text }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -46,6 +71,9 @@ export default {
     },
     numQuestions () {
       return this.$store.getters['questions/questionsLength']
+    },
+    questions () {
+      return this.$store.getters['questions/questions']
     }
   },
   methods: {

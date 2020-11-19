@@ -71,7 +71,7 @@ export function makeServer ({ environment = 'development' } = {}) {
         alternatives: [
           { text: 'Christian Bale', id: uuidv4(), answer: true },
           { text: 'Robert Pattinson', id: uuidv4(), answer: false },
-          { text: 'Michael Keaton', id: uuidv4(), answer: true },
+          { text: 'Michael Keaton', id: uuidv4(), answer: false },
           { text: 'Adam West', id: uuidv4(), answer: false }
         ],
         used: false
@@ -82,7 +82,7 @@ export function makeServer ({ environment = 'development' } = {}) {
         alternatives: [
           { text: '2009', id: uuidv4(), answer: false },
           { text: '2019', id: uuidv4(), answer: true },
-          { text: '2015', id: uuidv4(), answer: true },
+          { text: '2015', id: uuidv4(), answer: false },
           { text: '2012', id: uuidv4(), answer: false }
         ],
         used: false
